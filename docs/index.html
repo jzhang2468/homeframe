@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b10">
+<meta name="description" content="An interactive 3D apartment for testing how household robots discover chores, find their way, and use spatial memory.">
+<title>HOMEFRAME — Domestic Robotics Lab</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="masthead">
+  <a class="brand" href="./" aria-label="Homeframe lab home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>HOMEFRAME <small>ROBOTICS LAB</small></span></a>
+  <div class="mast-actions">
+    <span class="mast-context">SPATIAL AGENTS WORKSHOP</span>
+    <button type="button" id="setup-shortcut" class="metal-button">Lab setup</button>
+    <button type="button" id="protocol" class="metal-button">Protocol <span aria-hidden="true">↗</span></button>
+  </div>
+</header>
+<main class="shell">
+  <section class="hero" aria-labelledby="title">
+    <div>
+      <p class="overline"><span></span> DOMESTIC AUTONOMY TESTBED</p>
+      <h1 id="title">READ THE ROOM<span>.</span></h1>
+    </div>
+    <p class="hero-deck">A home no robot has mapped yet. Send in two crews to discover chores, navigate around each other, and find their way back.</p>
+  </section>
+
+  <div class="workspace">
+    <section class="viewer" aria-label="Interactive apartment simulation">
+      <div class="viewport" id="viewport">
+        <div id="scene-host" aria-label="3D apartment. Drag to orbit and scroll to zoom. Select a robot to inspect it."></div>
+        <div class="scene-identity"><b>APARTMENT 01</b><span id="scene-mode">SIMULATED FLOOR PLAN</span></div>
+        <div id="run-status" class="run-status"><i></i> <span>READY</span></div>
+        <div id="loading" class="loading"><span class="spinner"></span><p>Initializing apartment</p></div>
+        <div class="view-tools" aria-label="Camera controls">
+          <button id="top" class="metal-button" type="button" aria-label="Top view" title="Top view">⌗</button>
+          <button id="iso" class="metal-button" type="button" aria-label="Isometric view" title="Isometric view">◈</button>
+          <button id="zoom-in" class="metal-button" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+          <button id="zoom-out" class="metal-button" type="button" aria-label="Zoom out" title="Zoom out">−</button>
+        </div>
+        <div class="scene-bottom">
+          <div class="legend"><span><i class="tidy"></i> TIDY</span><span><i class="care"></i> CARE</span><span><i class="landmark"></i> Landmark</span></div>
+          <span id="orbit-hint" class="orbit-hint">DRAG TO ORBIT · SCROLL TO ZOOM</span>
+        </div>
+      </div>
+      <div class="transport" id="run-transport">
+        <div class="transport-group">
+          <button id="play" type="button" class="run-button"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Run</span></button>
+          <button id="reset" type="button" class="metal-button reset" title="Reset same trial" aria-label="Reset same trial">↺</button>
+          <button id="step" type="button" class="metal-button step-button" title="Advance five simulated seconds" aria-label="Step five seconds">+5s</button>
+          <button id="speed" type="button" class="metal-button" title="Change simulation speed" aria-label="Change simulation speed">1×</button>
+          <output id="clock" class="clock" aria-label="Simulated time">00:00</output>
+        </div>
+        <div class="transport-group layers" aria-label="Visualization layer">
+          <button data-layer="sensors" type="button" class="layer active" aria-pressed="true">Sensors</button>
+          <button data-layer="paths" type="button" class="layer" aria-pressed="false">Trails</button>
+          <button data-layer="traffic" type="button" class="layer" aria-pressed="false">Traffic</button>
+        </div>
+      </div>
+      <div class="transport editor-transport" id="editor-transport" hidden>
+        <span><b>LAYOUT EDITOR</b> <span class="editor-hint">Drag a chore, or select it and click open floor.</span></span>
+        <button id="finish-edit" class="run-button" type="button">Done editing <span aria-hidden="true">✓</span></button>
+      </div>
+      <p class="layer-note" id="layer-note">Select a robot to see its current sensor field and the area it has mapped.</p>
+    </section>
+
+    <aside class="console" aria-label="Experiment controls and telemetry">
+      <div class="console-head">
+        <h2>MISSION CONTROL</h2>
+        <span id="trial-id">SEED 42</span>
+      </div>
+      <div class="console-tabs" role="tablist" aria-label="Mission control views">
+        <button id="tab-robot" role="tab" type="button" aria-controls="panel-robot" aria-selected="true" data-tab="robot">Robot</button>
+        <button id="tab-setup" role="tab" type="button" aria-controls="panel-setup" aria-selected="false" tabindex="-1" data-tab="setup">Setup</button>
+        <button id="tab-chores" role="tab" type="button" aria-controls="panel-chores" aria-selected="false" tabindex="-1" data-tab="chores">Chores</button>
+        <button id="tab-results" role="tab" type="button" aria-controls="panel-results" aria-selected="false" tabindex="-1" data-tab="results">Results</button>
+      </div>
+
+      <section id="panel-robot" class="console-panel" role="tabpanel" aria-labelledby="tab-robot">
+        <label for="agent-select" class="field-label">INSPECT ROBOT</label>
+        <select id="agent-select" aria-label="Robot to inspect"></select>
+        <div id="robot-role" class="robot-role"><i></i><div><strong id="role-name">TIDY</strong><p id="role-objective">Find clutter and deliver it to the sorting dock.</p><p id="robot-parameters-live"></p></div></div>
+        <div class="decision">
+          <span class="field-label">CURRENT ACTION</span>
+          <strong id="agent-action">Waiting to start</strong>
+          <p id="agent-target">—</p>
+        </div>
+        <div class="telemetry">
+          <div><span>BATTERY</span><strong id="agent-battery">—</strong></div>
+          <div><span>DISCOVERED</span><strong id="agent-map-count">—</strong></div>
+          <div><span>CHORE COUNT</span><strong id="agent-tasks">—</strong></div>
+        </div>
+        <div class="map-head"><span class="field-label">PRIVATE SPATIAL MAP</span><span id="map-mode">MEMORY ON</span></div>
+        <canvas id="knowledge" width="620" height="278" aria-label="The selected robot’s private map of cells, obstacles, detected chores, robots, and landmarks."></canvas>
+        <div class="map-legend"><span><i class="lit"></i>Visible</span><span><i class="mapped"></i>Mapped</span><span><i class="obstacle"></i>Obstacle</span><span><i class="landmark"></i><span id="map-mark-label">Saved</span></span><span><i class="occupant"></i>Robot sighting</span><span><i class="chore"></i>Chore</span></div>
+        <div class="memory-log">
+          <span class="field-label"><span id="landmark-label">SAVED LANDMARKS</span> <b id="landmark-count">0</b></span>
+          <ul id="landmark-log"><li>Awaiting first observation.</li></ul>
+        </div>
+      </section>
+
+      <section id="panel-setup" class="console-panel" role="tabpanel" aria-labelledby="tab-setup" hidden>
+        <div class="setup-roles">
+          <article><span class="tag tidy-tag"><i></i> TIDY</span><strong>Collect & sort</strong><p>Deliver clutter to the sorting dock. Prefer nearby items to shorten collection trips.</p></article>
+          <article><span class="tag care-tag"><i></i> CARE</span><strong>Detect & clean</strong><p>Resolve spills and leaks. Give urgent jobs priority, then return to charge.</p></article>
+        </div>
+        <div class="field"><label class="field-label" for="scenario">CHORE LAYOUT</label><select id="scenario"><option value="routine">Daily routine</option><option value="afterparty">After a gathering</option></select></div>
+        <button id="edit-layout" class="metal-button wide edit-layout" type="button"><span id="move-label">Move chores</span><span id="move-count">0 moved</span></button>
+        <div id="placement-controls" class="placement" hidden>
+          <label class="field-label" for="edit-chore">CHORE TO MOVE</label>
+          <select id="edit-chore"></select>
+          <div class="placement-coordinates">
+            <label for="chore-x">X · east (m)<input id="chore-x" type="number" min="-10" max="10" step="any" required></label>
+            <label for="chore-y">Y · north (m)<input id="chore-y" type="number" min="-7.5" max="7.5" step="any" required></label>
+            <button id="place-chore" type="button" class="metal-button">Place</button>
+          </div>
+          <p class="placement-message" id="placement-message" role="status"></p>
+          <button id="reset-layout" type="button" class="text-button">Restore original positions</button>
+        </div>
+        <div class="field"><label class="field-label" for="population">ROBOT COUNT</label><output id="population-value" for="population">6</output><input id="population" type="range" min="2" max="24" value="6" step="2"></div>
+        <div class="field compact"><label class="field-label" for="seed">TRIAL SEED</label><input id="seed" type="number" required min="1" max="999999" value="42" inputmode="numeric"></div>
+        <label class="switch-row"><span><strong>Retain spatial memory</strong><small>Keep the observed map and reuse landmarks.</small></span><input id="memory" type="checkbox" checked><i></i></label>
+        <details id="parameter-section" class="robot-parameters">
+          <summary>Robot parameters <output id="parameter-count">Defaults</output></summary>
+          <p class="muted">Tune each crew’s base speed, sensor range and view angle.</p>
+          <div class="parameter-grid" id="parameter-grid"></div>
+          <button id="reset-parameters" type="button" class="text-button">Restore parameter defaults</button>
+        </details>
+        <button id="apply-setup" class="run-button wide" type="button">Run this setup <span aria-hidden="true">→</span></button>
+        <div class="save-configurations" aria-label="Save configurations for comparison">
+          <button id="save-a" class="metal-button" type="button">Save as A</button>
+          <button id="save-b" class="metal-button" type="button">Save as B</button>
+        </div>
+        <p class="muted compare-help">Save two setups, then compare them in Results.</p>
+      </section>
+
+      <section id="panel-chores" class="console-panel" role="tabpanel" aria-labelledby="tab-chores" hidden>
+        <p class="field-label">HOUSEHOLD TASKS <output id="detected-count">0 detected</output></p>
+        <p class="muted chore-help">Observer view. Robots discover these tasks through their own sensors.</p>
+        <ul id="chore-board" aria-label="Household task status"></ul>
+      </section>
+      <section id="panel-results" class="console-panel" role="tabpanel" aria-labelledby="tab-results" hidden>
+        <p class="field-label">EXPERIMENT COMPARISON</p>
+        <h3>Compare two setups</h3>
+        <div id="comparison-slots" class="comparison-slots"></div>
+        <p id="compare-advice" class="muted"></p>
+        <button id="compare-ab" class="run-button wide" type="button" disabled>Run A/B comparison <span aria-hidden="true">→</span></button>
+        <button id="compare" class="metal-button wide compare-secondary" type="button" title="Compare both memory settings for the active trial">Test memory on / off <span aria-hidden="true">→</span></button>
+        <p id="compare-progress" class="compare-progress" role="status"></p>
+        <div id="comparison" hidden></div>
+        <button id="export" class="metal-button wide export" type="button">Export run JSON <span aria-hidden="true">↓</span></button>
+      </section>
+    </aside>
+  </div>
+
+  <section class="totals" aria-label="Current trial totals">
+    <div class="total"><span>CHORES COMPLETE</span><strong id="total-tasks">0 / —</strong></div>
+    <div class="total"><span>AREA DISCOVERED</span><strong id="total-map">0%</strong></div>
+    <div class="total"><span>LANDMARK REUSES</span><strong id="total-reuse">0</strong></div>
+    <div class="total"><span>ROBOT YIELDS</span><strong id="total-yields">0</strong></div>
+  </section>
+  <footer><span>HOMEFRAME / SPATIAL AGENTS</span><span>Simulated apartment, sensors and chores.</span></footer>
+</main>
+
+<dialog id="protocol-dialog">
+  <form method="dialog"><button class="metal-button close" aria-label="Close protocol">×</button></form>
+  <p class="overline"><span></span> EXPERIMENT PROTOCOL</p>
+  <h2>Learning a home.</h2>
+  <p>At spawn, robots know their role and starting dock. The apartment layout, chores and other robots are discovered through local sensing.</p>
+  <dl>
+    <dt>01 / Perceive</dt><dd>A robot sees a finite cone. Walls and selected furniture occlude its sensors. It labels free space, obstacles, chores and other robots on its own map.</dd>
+    <dt>02 / Decide</dt><dd>TIDY prefers efficient collection and delivery. CARE prioritizes urgent cleaning and returns to charge between jobs. Both crews can interrupt a search when battery is low. Nearby robots yield or detour at conflicts.</dd>
+    <dt>03 / Remember</dt><dd>Doorways, docks and chore locations can become landmarks. With retention enabled, a robot can retrieve them to plan a later trip.</dd>
+    <dt>04 / Compare</dt><dd>Inspect one robot’s knowledge, or use Trails and Traffic to see the combined paths and passage use. Save setups A and B to compare different chore placements and robot parameters. You can also test memory on and off for the active setup.</dd>
+  </dl>
+  <p class="muted">This is a behavior model in a designed floor plan. Sensor ranges, service times and battery use are simulation parameters.</p>
+</dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
