@@ -1,4 +1,8 @@
-# HOMEFRAME · Domestic Robotics Lab
+# HOMEFRAME · Spatial Agents
+
+[Open the hotel circulation final project](https://jzhang2468.github.io/homeframe/final/)
+
+[Read the final semantic model](docs/final/semantic-model.md)
 
 [Open the public simulation](https://jzhang2468.github.io/homeframe/)
 

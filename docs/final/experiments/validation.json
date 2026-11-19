@@ -1,0 +1,3513 @@
+{
+  "project": "HOMEFRAME Shared Circulation",
+  "createdAt": "2026-11-19T18:26:29.567Z",
+  "engineSHA256": "444d3757e46aec97061aa78ecfa34afe0919490647215dddadf48a0c710cf69a",
+  "protocol": {
+    "horizonSeconds": 300,
+    "tickSeconds": 0.1,
+    "guests": 24,
+    "robots": 4,
+    "deliveries": 8,
+    "memory": true,
+    "seeds": [
+      7,
+      42,
+      99
+    ],
+    "comparability": "Identical seeded guest arrival times, venue demands and order release times across candidates. Robot parking/base poses vary with the design. Kitchen pickup remains fixed.",
+    "units": {
+      "distance": "metres",
+      "time": "simulated seconds",
+      "energyUsed": "synthetic movement/service index, not Wh"
+    },
+    "limitations": [
+      "Three deterministic seeds are a robustness probe, not an empirical statistical validation.",
+      "Incomplete visits/cycles at the fixed horizon remain incomplete. Completed-trip means are conditional on completion; compare counts first.",
+      "Network-distance values are observer-only shortest paths between quantized 0.5 m grid nodes.",
+      "No measured human stress, live hotel traffic or calibrated robot navigation is claimed."
+    ]
+  },
+  "checks": {
+    "testCommand": "node --test tests/engine.test.mjs",
+    "testsPassed": 16,
+    "testsFailed": 0,
+    "all27DesignCombinationsConnected": true,
+    "physicalBoundaryChecks": true
+  },
+  "results": [
+    {
+      "seed": 7,
+      "preset": "reference",
+      "design": {
+        "dock": "kitchen",
+        "bay": "none",
+        "junction": "console"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 8,
+        "activeGuests": 0,
+        "activeRobots": 0,
+        "meanGuestTripTime": 37.00416666666693,
+        "meanRobotTripTime": 49.9874999999993,
+        "meanGuestWait": 0.7250000000000001,
+        "meanRobotWait": 7.799999999999988,
+        "totalWait": 48.59999999999995,
+        "totalDistance": 1045.5588953446718,
+        "energyUsed": 24.447038644435953,
+        "yieldEvents": 113,
+        "bayUses": 0,
+        "exploration": 96.93251533742331,
+        "retainedCoverage": 96.93251533742331,
+        "meanEuclideanDistance": 13.465609645343187,
+        "meanNetworkDistance": 15.171828771987029,
+        "contestedPassages": [
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 23,
+            "waitSeconds": 11.199999999999976,
+            "throughput": 20
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 18,
+            "waitSeconds": 8.799999999999985,
+            "throughput": 16
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 6,
+            "waitSeconds": 8.399999999999986,
+            "throughput": 0
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 27,
+            "waitSeconds": 6.699999999999992,
+            "throughput": 28
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 11,
+            "waitSeconds": 4.799999999999999,
+            "throughput": 4
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 8,
+            "waitSeconds": 0.9999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 6,
+            "waitSeconds": 0.8999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 3,
+            "waitSeconds": 0.7999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 1,
+            "waitSeconds": 0.7,
+            "throughput": 0
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 5,
+            "waitSeconds": 0.30000000000000004,
+            "throughput": 12
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 3,
+            "waitSeconds": 0,
+            "throughput": 2
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 1,
+            "waitSeconds": 0,
+            "throughput": 6
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 0.7250000000000001,
+            "meanDistance": 32.6511838453842,
+            "yieldEvents": 77
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 7.799999999999988,
+            "meanDistance": 65.48262076386271,
+            "yieldEvents": 36,
+            "deliveriesCompleted": 8,
+            "roundTrips": 8,
+            "meanTripTime": 49.9874999999993
+          }
+        }
+      },
+      "memoryReuseEvents": 114,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 17.999999999999986,
+          "seconds": 17.999999999999986,
+          "waitSeconds": 1.2,
+          "distance": 8.443916796908926,
+          "depart": {
+            "x": -8.488764555791377,
+            "y": -0.3056341233545493
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 52.70000000000048,
+          "seconds": 52.70000000000048,
+          "waitSeconds": 8.499999999999986,
+          "distance": 31.2452238119507,
+          "depart": {
+            "x": -9.302707804630398,
+            "y": 0.3669302603643849
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 55.10000000000051,
+          "seconds": 55.10000000000051,
+          "waitSeconds": 4.899999999999999,
+          "distance": 33.14911884688676,
+          "depart": {
+            "x": -7.831766517406302,
+            "y": 1.8779638180895106
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 63.20000000000063,
+          "seconds": 63.20000000000063,
+          "waitSeconds": 7.599999999999989,
+          "distance": 38.54919633106611,
+          "depart": {
+            "x": -9.546416730277436,
+            "y": -0.19555373902679818
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 17.999999999999986,
+          "completedAt": 72.00000000000018,
+          "seconds": 54.0000000000002,
+          "waitSeconds": 3.3999999999999995,
+          "distance": 38.81285726709031,
+          "depart": {
+            "x": -8.405438667873216,
+            "y": -0.1604386678732198
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D06",
+          "startedAt": 52.70000000000048,
+          "completedAt": 100.39999999999857,
+          "seconds": 47.69999999999809,
+          "waitSeconds": 4.299999999999985,
+          "distance": 33.36683992204093,
+          "depart": {
+            "x": -9.091889688379297,
+            "y": 0.3848896883792941
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D07",
+          "startedAt": 55.10000000000051,
+          "completedAt": 110.99999999999797,
+          "seconds": 55.899999999997455,
+          "waitSeconds": 1.1999999999999957,
+          "distance": 39.581322571982234,
+          "depart": {
+            "x": -7.725999999999999,
+            "y": 1.7276653500953674
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D08",
+          "startedAt": 63.20000000000063,
+          "completedAt": 116.49999999999766,
+          "seconds": 53.29999999999703,
+          "waitSeconds": 0.09999999999999964,
+          "distance": 38.782007507524895,
+          "depart": {
+            "x": -9.625213694853011,
+            "y": -0.3592830254634534
+          }
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "seed": 7,
+      "preset": "clear-circulation",
+      "design": {
+        "dock": "kitchen",
+        "bay": "lounge",
+        "junction": "open"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 8,
+        "activeGuests": 0,
+        "activeRobots": 0,
+        "meanGuestTripTime": 36.90416666666694,
+        "meanRobotTripTime": 56.42499999999894,
+        "meanGuestWait": 0.6041666666666667,
+        "meanRobotWait": 15.249999999999986,
+        "totalWait": 75.49999999999994,
+        "totalDistance": 1053.0844685977263,
+        "energyUsed": 25.434177403974324,
+        "yieldEvents": 101,
+        "bayUses": 13,
+        "exploration": 96.94708276797829,
+        "retainedCoverage": 96.94708276797829,
+        "meanEuclideanDistance": 13.465609645343187,
+        "meanNetworkDistance": 15.162675858899108,
+        "contestedPassages": [
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 17,
+            "waitSeconds": 24.70000000000008,
+            "throughput": 22
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 7,
+            "waitSeconds": 17.099999999999973,
+            "throughput": 4
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 16,
+            "waitSeconds": 12.399999999999972,
+            "throughput": 16
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 4,
+            "waitSeconds": 8.399999999999986,
+            "throughput": 0
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 25,
+            "waitSeconds": 2.0000000000000004,
+            "throughput": 28
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 6,
+            "waitSeconds": 2.0000000000000004,
+            "throughput": 2
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 6,
+            "waitSeconds": 1.0999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 8,
+            "waitSeconds": 0.9999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 3,
+            "waitSeconds": 0.7999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 1,
+            "waitSeconds": 0.7,
+            "throughput": 0
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 5,
+            "waitSeconds": 0.30000000000000004,
+            "throughput": 12
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 2,
+            "waitSeconds": 0,
+            "throughput": 6
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 0.6041666666666667,
+            "meanDistance": 32.611552127001936,
+            "yieldEvents": 72
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 15.249999999999986,
+            "meanDistance": 67.60180438741996,
+            "yieldEvents": 29,
+            "deliveriesCompleted": 8,
+            "roundTrips": 8,
+            "meanTripTime": 56.42499999999894
+          }
+        }
+      },
+      "memoryReuseEvents": 115,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 17.999999999999986,
+          "seconds": 17.999999999999986,
+          "waitSeconds": 1.2,
+          "distance": 8.443916796908926,
+          "depart": {
+            "x": -8.488764555791377,
+            "y": -0.3056341233545493
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 52.70000000000048,
+          "seconds": 52.70000000000048,
+          "waitSeconds": 8.499999999999986,
+          "distance": 31.2452238119507,
+          "depart": {
+            "x": -9.302707804630398,
+            "y": 0.3669302603643849
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 55.10000000000051,
+          "seconds": 55.10000000000051,
+          "waitSeconds": 4.899999999999999,
+          "distance": 33.14911884688676,
+          "depart": {
+            "x": -7.831766517406302,
+            "y": 1.8779638180895106
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 68.90000000000036,
+          "seconds": 68.90000000000036,
+          "waitSeconds": 9.299999999999983,
+          "distance": 39.72560683782335,
+          "depart": {
+            "x": -9.546416730277436,
+            "y": -0.19555373902679818
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 17.999999999999986,
+          "completedAt": 85.8999999999994,
+          "seconds": 67.89999999999941,
+          "waitSeconds": 14.299999999999962,
+          "distance": 40.222411573259436,
+          "depart": {
+            "x": -8.405438667873216,
+            "y": -0.1604386678732198
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D06",
+          "startedAt": 52.70000000000048,
+          "completedAt": 96.59999999999879,
+          "seconds": 43.89999999999831,
+          "waitSeconds": 1.4999999999999947,
+          "distance": 32.05815871809475,
+          "depart": {
+            "x": -9.091889688379297,
+            "y": 0.3848896883792941
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D08",
+          "startedAt": 68.90000000000036,
+          "completedAt": 130.49999999999687,
+          "seconds": 61.59999999999651,
+          "waitSeconds": 4.699999999999983,
+          "distance": 39.569059955719126,
+          "depart": {
+            "x": -9.63722915218711,
+            "y": -0.3398994028744616
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D07",
+          "startedAt": 55.10000000000051,
+          "completedAt": 138.39999999999642,
+          "seconds": 83.29999999999592,
+          "waitSeconds": 16.600000000000037,
+          "distance": 45.99372100903677,
+          "depart": {
+            "x": -7.725999999999999,
+            "y": 1.7276653500953674
+          }
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "seed": 7,
+      "preset": "service-buffer",
+      "design": {
+        "dock": "service",
+        "bay": "service",
+        "junction": "partition"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 7,
+        "activeGuests": 0,
+        "activeRobots": 1,
+        "meanGuestTripTime": 37.050000000000274,
+        "meanRobotTripTime": 53.21428571428514,
+        "meanGuestWait": 0.7500000000000001,
+        "meanRobotWait": 21.27500000000007,
+        "totalWait": 103.10000000000028,
+        "totalDistance": 1126.15498037823,
+        "energyUsed": 32.06254707956029,
+        "yieldEvents": 134,
+        "bayUses": 0,
+        "exploration": 97.82016348773843,
+        "retainedCoverage": 97.82016348773843,
+        "meanEuclideanDistance": 13.82357450956571,
+        "meanNetworkDistance": 15.543957425360881,
+        "contestedPassages": [
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 30,
+            "waitSeconds": 62.900000000000624,
+            "throughput": 4
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 24,
+            "waitSeconds": 10.799999999999978,
+            "throughput": 20
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 17,
+            "waitSeconds": 8.799999999999985,
+            "throughput": 16
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 5,
+            "waitSeconds": 4.100000000000001,
+            "throughput": 0
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 5,
+            "waitSeconds": 3.5000000000000018,
+            "throughput": 12
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 6,
+            "waitSeconds": 2.600000000000001,
+            "throughput": 12
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 4,
+            "waitSeconds": 2.500000000000001,
+            "throughput": 4
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 25,
+            "waitSeconds": 2.0000000000000004,
+            "throughput": 28
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 8,
+            "waitSeconds": 0.9999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 4,
+            "waitSeconds": 0.7999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 3,
+            "waitSeconds": 0.4,
+            "throughput": 8
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 2,
+            "waitSeconds": 0,
+            "throughput": 6
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 0.7500000000000001,
+            "meanDistance": 32.659193411822024,
+            "yieldEvents": 74
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 21.27500000000007,
+            "meanDistance": 85.58358462362536,
+            "yieldEvents": 60,
+            "deliveriesCompleted": 8,
+            "roundTrips": 7,
+            "meanTripTime": 53.21428571428514
+          }
+        }
+      },
+      "memoryReuseEvents": 125,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 30.600000000000165,
+          "seconds": 30.600000000000165,
+          "waitSeconds": 0.2,
+          "distance": 17.978634615614546,
+          "depart": {
+            "x": -12.386821519965629,
+            "y": -0.6819847310945159
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 50.10000000000044,
+          "seconds": 50.10000000000044,
+          "waitSeconds": 2.700000000000001,
+          "distance": 31.101323606960893,
+          "depart": {
+            "x": -9.950128961461179,
+            "y": -1.1071314228975107
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 51.30000000000046,
+          "seconds": 51.30000000000046,
+          "waitSeconds": 3.900000000000002,
+          "distance": 34.38451030038936,
+          "depart": {
+            "x": -10.668585302137046,
+            "y": 0.8964390085746577
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 71.30000000000022,
+          "seconds": 71.30000000000022,
+          "waitSeconds": 9.299999999999983,
+          "distance": 43.838131536317135,
+          "depart": {
+            "x": -11.849446142728393,
+            "y": -0.9881605168347748
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 30.600000000000165,
+          "completedAt": 90.59999999999913,
+          "seconds": 59.99999999999896,
+          "waitSeconds": 2.400000000000001,
+          "distance": 45.18741562794995,
+          "depart": {
+            "x": -12.137829551820621,
+            "y": -0.6660034197023259
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D06",
+          "startedAt": 50.10000000000044,
+          "completedAt": 99.8999999999986,
+          "seconds": 49.79999999999816,
+          "waitSeconds": 1.6999999999999993,
+          "distance": 33.68111085768261,
+          "depart": {
+            "x": -9.765759575885285,
+            "y": -1.000646376267156
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D07",
+          "startedAt": 51.30000000000046,
+          "completedAt": 110.69999999999798,
+          "seconds": 59.399999999997526,
+          "waitSeconds": 3.899999999999986,
+          "distance": 42.64769025074562,
+          "depart": {
+            "x": -10.48317869021278,
+            "y": 1.0189999999999984
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "R04",
+          "type": "robot",
+          "state": "Returning by remembered places",
+          "phase": "return",
+          "goal": {
+            "id": "parking-R04",
+            "name": "Service base / R04 parking",
+            "roomId": "service-corridor"
+          },
+          "location": {
+            "world": {
+              "x": -9.744333124496922,
+              "y": -0.47012323031276,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "promenade",
+              "roomName": "Shared promenade",
+              "u": 0.05466687550307725,
+              "v": 1.09487676968724,
+              "nearestDoorId": "service-promenade",
+              "routeRooms": [
+                "promenade",
+                "service-corridor"
+              ]
+            }
+          },
+          "distances": {
+            "euclidean": 2.167916845673446,
+            "network": 2.5,
+            "travelled": 137.35365323515845
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 70.30000000000028,
+            "deliveries": 2,
+            "yields": 32,
+            "energyUsed": 13.06129225881267
+          },
+          "knowledge": {
+            "cells": 957,
+            "landmarks": 16,
+            "rooms": 8,
+            "doors": 7
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "preset": "lounge-dispatch",
+      "design": {
+        "dock": "lounge",
+        "bay": "none",
+        "junction": "console"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 7,
+        "activeGuests": 0,
+        "activeRobots": 1,
+        "meanGuestTripTime": 36.74166666666694,
+        "meanRobotTripTime": 49.02857142857048,
+        "meanGuestWait": 0.5166666666666667,
+        "meanRobotWait": 10.274999999999979,
+        "totalWait": 53.499999999999915,
+        "totalDistance": 1239.0030510748359,
+        "energyUsed": 41.459140155855366,
+        "yieldEvents": 108,
+        "bayUses": 0,
+        "exploration": 96.65529010238907,
+        "retainedCoverage": 96.65529010238907,
+        "meanEuclideanDistance": 12.189420518995364,
+        "meanNetworkDistance": 13.65222199080048,
+        "contestedPassages": [
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 21,
+            "waitSeconds": 19.300000000000004,
+            "throughput": 59
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 10,
+            "waitSeconds": 10.699999999999978,
+            "throughput": 6
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 15,
+            "waitSeconds": 8.799999999999985,
+            "throughput": 16
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 8,
+            "waitSeconds": 4.899999999999999,
+            "throughput": 0
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 4,
+            "waitSeconds": 4.799999999999999,
+            "throughput": 2
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 25,
+            "waitSeconds": 2.0000000000000004,
+            "throughput": 28
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 8,
+            "waitSeconds": 0.9999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 6,
+            "waitSeconds": 0.8999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 3,
+            "waitSeconds": 0.7999999999999999,
+            "throughput": 12
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 5,
+            "waitSeconds": 0.30000000000000004,
+            "throughput": 12
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 2,
+            "waitSeconds": 0,
+            "throughput": 6
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 0.5166666666666667,
+            "meanDistance": 32.61119996361004,
+            "yieldEvents": 68
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 10.274999999999979,
+            "meanDistance": 114.08356298704871,
+            "yieldEvents": 40,
+            "deliveriesCompleted": 8,
+            "roundTrips": 7,
+            "meanTripTime": 49.02857142857048
+          }
+        }
+      },
+      "memoryReuseEvents": 120,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 38.10000000000027,
+          "seconds": 38.10000000000027,
+          "waitSeconds": 3.800000000000002,
+          "distance": 21.673377008913835,
+          "depart": {
+            "x": -2.227764555791377,
+            "y": -1.9356341233545493
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 40.80000000000031,
+          "seconds": 40.80000000000031,
+          "waitSeconds": 1.6000000000000003,
+          "distance": 27.031508880620695,
+          "depart": {
+            "x": -1.5707665174063017,
+            "y": 0.24796381808951073
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 46.30000000000039,
+          "seconds": 46.30000000000039,
+          "waitSeconds": 5.1999999999999975,
+          "distance": 29.452870892990674,
+          "depart": {
+            "x": -3.0417078046303976,
+            "y": -1.2630697396356152
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 38.10000000000027,
+          "completedAt": 92.09999999999904,
+          "seconds": 53.99999999999877,
+          "waitSeconds": 4.799999999999983,
+          "distance": 37.895015235859375,
+          "depart": {
+            "x": -2.4239449090800815,
+            "y": -1.783055090919919
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D07",
+          "startedAt": 46.30000000000039,
+          "completedAt": 98.89999999999866,
+          "seconds": 52.59999999999827,
+          "waitSeconds": 2.8999999999999897,
+          "distance": 38.10760024448122,
+          "depart": {
+            "x": -2.985910805722323,
+            "y": -1.4810000000000016
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D06",
+          "startedAt": 40.80000000000031,
+          "completedAt": 101.29999999999852,
+          "seconds": 60.49999999999821,
+          "waitSeconds": 9.599999999999977,
+          "distance": 35.825690758605134,
+          "depart": {
+            "x": -1.4227800528869259,
+            "y": 0.14968412957209837
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D08",
+          "startedAt": 92.09999999999904,
+          "completedAt": 142.99999999999616,
+          "seconds": 50.89999999999712,
+          "waitSeconds": 1.8999999999999932,
+          "distance": 36.79509788270999,
+          "depart": {
+            "x": -2.08346611508935,
+            "y": -2.122910334916755
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "R04",
+          "type": "robot",
+          "state": "Giving guests crossing priority",
+          "phase": "return",
+          "goal": {
+            "id": "parking-R04",
+            "name": "Lounge-edge base / R04 parking",
+            "roomId": "lounge"
+          },
+          "location": {
+            "world": {
+              "x": 0.6944044417016213,
+              "y": -1.4810000000000016,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "promenade",
+              "roomName": "Shared promenade",
+              "u": 10.493404441701621,
+              "v": 0.0839999999999983,
+              "nearestDoorId": "promenade-lounge",
+              "routeRooms": [
+                "promenade",
+                "lounge"
+              ]
+            }
+          },
+          "distances": {
+            "euclidean": 3.9947082296470797,
+            "network": 4.207106781186548,
+            "travelled": 229.55309104401388
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 11.299999999999976,
+            "deliveries": 1,
+            "yields": 12,
+            "energyUsed": 20.298047283520816
+          },
+          "knowledge": {
+            "cells": 909,
+            "landmarks": 16,
+            "rooms": 8,
+            "doors": 7
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "preset": "reference",
+      "design": {
+        "dock": "kitchen",
+        "bay": "none",
+        "junction": "console"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 8,
+        "activeGuests": 0,
+        "activeRobots": 0,
+        "meanGuestTripTime": 43.941666666666954,
+        "meanRobotTripTime": 45.274999999999565,
+        "meanGuestWait": 1.9583333333333333,
+        "meanRobotWait": 12.399999999999997,
+        "totalWait": 96.59999999999998,
+        "totalDistance": 1155.4295618518877,
+        "energyUsed": 21.895527068702364,
+        "yieldEvents": 125,
+        "bayUses": 0,
+        "exploration": 97.2733469665985,
+        "retainedCoverage": 97.2733469665985,
+        "meanEuclideanDistance": 13.593708260510095,
+        "meanNetworkDistance": 15.914896728019903,
+        "contestedPassages": [
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 22,
+            "waitSeconds": 31.00000000000017,
+            "throughput": 26
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 10,
+            "waitSeconds": 17.999999999999986,
+            "throughput": 2
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 13,
+            "waitSeconds": 9.299999999999983,
+            "throughput": 22
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 15,
+            "waitSeconds": 6.699999999999992,
+            "throughput": 14
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 13,
+            "waitSeconds": 6.499999999999993,
+            "throughput": 22
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 12,
+            "waitSeconds": 6.199999999999994,
+            "throughput": 26
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 8,
+            "waitSeconds": 4.699999999999999,
+            "throughput": 22
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 7,
+            "waitSeconds": 3.700000000000002,
+            "throughput": 2
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 14,
+            "waitSeconds": 3.1000000000000014,
+            "throughput": 10
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 8,
+            "waitSeconds": 1.4000000000000001,
+            "throughput": 10
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 1,
+            "waitSeconds": 0,
+            "throughput": 2
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 1,
+            "waitSeconds": 0,
+            "throughput": 4
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 1.9583333333333333,
+            "meanDistance": 38.44116556221278,
+            "yieldEvents": 96
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 12.399999999999997,
+            "meanDistance": 58.21039708969516,
+            "yieldEvents": 29,
+            "deliveriesCompleted": 8,
+            "roundTrips": 8,
+            "meanTripTime": 45.274999999999565
+          }
+        }
+      },
+      "memoryReuseEvents": 126,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 22.100000000000044,
+          "seconds": 22.100000000000044,
+          "waitSeconds": 0.6,
+          "distance": 11.503317338225754,
+          "depart": {
+            "x": -9.955470393553254,
+            "y": 1.7995801407471452
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 49.90000000000044,
+          "seconds": 49.90000000000044,
+          "waitSeconds": 2.3000000000000007,
+          "distance": 36.87565823300932,
+          "depart": {
+            "x": -8.787789421896003,
+            "y": 0.7295094046071132
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 50.10000000000044,
+          "seconds": 50.10000000000044,
+          "waitSeconds": 11.199999999999976,
+          "distance": 28.343113209221485,
+          "depart": {
+            "x": -10.373131111156226,
+            "y": 1.2367546897517867
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 52.20000000000047,
+          "seconds": 52.20000000000047,
+          "waitSeconds": 7.699999999999989,
+          "distance": 34.39815605819991,
+          "depart": {
+            "x": -9.667731576050343,
+            "y": -0.2342868250193736
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 22.100000000000044,
+          "completedAt": 64.50000000000061,
+          "seconds": 42.40000000000057,
+          "waitSeconds": 2.6000000000000014,
+          "distance": 28.766791886876213,
+          "depart": {
+            "x": -9.724291574177162,
+            "y": 1.7531769609796188
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D07",
+          "startedAt": 50.10000000000044,
+          "completedAt": 72.80000000000014,
+          "seconds": 22.699999999999697,
+          "waitSeconds": 3.7999999999999865,
+          "distance": 11.557705584198011,
+          "depart": {
+            "x": -10.274197805141444,
+            "y": 1.090332962979857
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D06",
+          "startedAt": 49.90000000000044,
+          "completedAt": 105.1999999999983,
+          "seconds": 55.29999999999786,
+          "waitSeconds": 7.299999999999981,
+          "distance": 38.294513222133105,
+          "depart": {
+            "x": -8.721489823552334,
+            "y": 0.560390842295339
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D08",
+          "startedAt": 52.20000000000047,
+          "completedAt": 119.69999999999747,
+          "seconds": 67.499999999997,
+          "waitSeconds": 14.100000000000051,
+          "distance": 43.10233282691684,
+          "depart": {
+            "x": -9.64219376489893,
+            "y": -0.48100000000000165
+          }
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "seed": 42,
+      "preset": "clear-circulation",
+      "design": {
+        "dock": "kitchen",
+        "bay": "lounge",
+        "junction": "open"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 8,
+        "activeGuests": 0,
+        "activeRobots": 0,
+        "meanGuestTripTime": 43.779166666666924,
+        "meanRobotTripTime": 50.33749999999928,
+        "meanGuestWait": 1.4875,
+        "meanRobotWait": 8.174999999999985,
+        "totalWait": 68.39999999999995,
+        "totalDistance": 1208.6543081844495,
+        "energyUsed": 25.567885336788162,
+        "yieldEvents": 134,
+        "bayUses": 24,
+        "exploration": 97.28629579375848,
+        "retainedCoverage": 97.28629579375848,
+        "meanEuclideanDistance": 13.593708260510095,
+        "meanNetworkDistance": 15.896590901844062,
+        "contestedPassages": [
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 11,
+            "waitSeconds": 17.999999999999986,
+            "throughput": 4
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 29,
+            "waitSeconds": 13.599999999999968,
+            "throughput": 34
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 15,
+            "waitSeconds": 11.399999999999975,
+            "throughput": 22
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 15,
+            "waitSeconds": 6.199999999999994,
+            "throughput": 14
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 9,
+            "waitSeconds": 4.799999999999999,
+            "throughput": 22
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 16,
+            "waitSeconds": 3.1000000000000014,
+            "throughput": 10
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 8,
+            "waitSeconds": 2.600000000000001,
+            "throughput": 12
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 13,
+            "waitSeconds": 2.3000000000000007,
+            "throughput": 26
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 11,
+            "waitSeconds": 0.5,
+            "throughput": 22
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 5,
+            "waitSeconds": 0,
+            "throughput": 0
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 1,
+            "waitSeconds": 0,
+            "throughput": 4
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 1.4875,
+            "meanDistance": 38.872739228108166,
+            "yieldEvents": 100
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 8.174999999999985,
+            "meanDistance": 68.92714167746338,
+            "yieldEvents": 34,
+            "deliveriesCompleted": 8,
+            "roundTrips": 8,
+            "meanTripTime": 50.33749999999928
+          }
+        }
+      },
+      "memoryReuseEvents": 125,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 22.100000000000044,
+          "seconds": 22.100000000000044,
+          "waitSeconds": 0.6,
+          "distance": 11.503317338225754,
+          "depart": {
+            "x": -9.955470393553254,
+            "y": 1.7995801407471452
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 48.900000000000425,
+          "seconds": 48.900000000000425,
+          "waitSeconds": 10.799999999999978,
+          "distance": 28.043565684386817,
+          "depart": {
+            "x": -10.373131111156226,
+            "y": 1.2367546897517867
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 22.100000000000044,
+          "completedAt": 63.90000000000064,
+          "seconds": 41.800000000000594,
+          "waitSeconds": 2.000000000000001,
+          "distance": 28.87825216487449,
+          "depart": {
+            "x": -9.724291574177162,
+            "y": 1.7531769609796188
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 65.90000000000053,
+          "seconds": 65.90000000000053,
+          "waitSeconds": 2.400000000000001,
+          "distance": 49.030711168076294,
+          "depart": {
+            "x": -8.787789421896003,
+            "y": 0.7295094046071132
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 67.90000000000042,
+          "seconds": 67.90000000000042,
+          "waitSeconds": 11.899999999999974,
+          "distance": 42.97780316590651,
+          "depart": {
+            "x": -9.667731576050343,
+            "y": -0.2342868250193736
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D07",
+          "startedAt": 63.90000000000064,
+          "completedAt": 81.89999999999962,
+          "seconds": 17.999999999998984,
+          "waitSeconds": 0,
+          "distance": 10.264331475729932,
+          "depart": {
+            "x": -9.725193403800834,
+            "y": 1.7533818398599035
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D08",
+          "startedAt": 65.90000000000053,
+          "completedAt": 122.29999999999733,
+          "seconds": 56.399999999996794,
+          "waitSeconds": 2.199999999999999,
+          "distance": 43.039372643866685,
+          "depart": {
+            "x": -8.691380141141945,
+            "y": 0.5917976898115375
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D06",
+          "startedAt": 48.900000000000425,
+          "completedAt": 130.59999999999687,
+          "seconds": 81.69999999999644,
+          "waitSeconds": 2.79999999999999,
+          "distance": 61.97121306878704,
+          "depart": {
+            "x": -10.274197805141444,
+            "y": 1.090332962979857
+          }
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "seed": 42,
+      "preset": "service-buffer",
+      "design": {
+        "dock": "service",
+        "bay": "service",
+        "junction": "partition"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 8,
+        "activeGuests": 0,
+        "activeRobots": 0,
+        "meanGuestTripTime": 45.55000000000026,
+        "meanRobotTripTime": 49.78749999999931,
+        "meanGuestWait": 2.204166666666666,
+        "meanRobotWait": 10.07499999999998,
+        "totalWait": 93.19999999999992,
+        "totalDistance": 1200.7997277271736,
+        "energyUsed": 23.498805552109538,
+        "yieldEvents": 138,
+        "bayUses": 1,
+        "exploration": 97.82016348773843,
+        "retainedCoverage": 97.82016348773843,
+        "meanEuclideanDistance": 14.017949202181777,
+        "meanNetworkDistance": 16.41803751125079,
+        "contestedPassages": [
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 16,
+            "waitSeconds": 26.300000000000104,
+            "throughput": 2
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 26,
+            "waitSeconds": 25.000000000000085,
+            "throughput": 26
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 14,
+            "waitSeconds": 15.89999999999996,
+            "throughput": 22
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 15,
+            "waitSeconds": 10.19999999999998,
+            "throughput": 22
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 14,
+            "waitSeconds": 5.4999999999999964,
+            "throughput": 14
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 14,
+            "waitSeconds": 3.1000000000000014,
+            "throughput": 10
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 9,
+            "waitSeconds": 2.2000000000000006,
+            "throughput": 26
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 8,
+            "waitSeconds": 1.3,
+            "throughput": 20
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 4,
+            "waitSeconds": 0.1,
+            "throughput": 8
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 9,
+            "waitSeconds": 0,
+            "throughput": 0
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 8,
+            "waitSeconds": 0,
+            "throughput": 4
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 4
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 2.204166666666666,
+            "meanDistance": 39.601235763575154,
+            "yieldEvents": 104
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 10.07499999999998,
+            "meanDistance": 62.592517350342455,
+            "yieldEvents": 34,
+            "deliveriesCompleted": 8,
+            "roundTrips": 8,
+            "meanTripTime": 49.78749999999931
+          }
+        }
+      },
+      "memoryReuseEvents": 131,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 17.59999999999998,
+          "seconds": 17.59999999999998,
+          "waitSeconds": 0,
+          "distance": 9.963929426079558,
+          "depart": {
+            "x": -9.574755094400622,
+            "y": -0.26777637813640287
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 55.60000000000052,
+          "seconds": 55.60000000000052,
+          "waitSeconds": 8.599999999999985,
+          "distance": 28.94905994464667,
+          "depart": {
+            "x": -10.552213990201192,
+            "y": 0.6606723218814944
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 56.40000000000053,
+          "seconds": 56.40000000000053,
+          "waitSeconds": 5.299999999999997,
+          "distance": 37.22525816744903,
+          "depart": {
+            "x": -12.27349462089272,
+            "y": -0.43199727829931794
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 64.40000000000062,
+          "seconds": 64.40000000000062,
+          "waitSeconds": 8.799999999999985,
+          "distance": 42.90498489819102,
+          "depart": {
+            "x": -10.974789421896002,
+            "y": -1.0284905953928867
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 17.59999999999998,
+          "completedAt": 65.90000000000053,
+          "seconds": 48.30000000000055,
+          "waitSeconds": 4.899999999999999,
+          "distance": 30.927385563271123,
+          "depart": {
+            "x": -9.480961641002862,
+            "y": -0.48100000000000165
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D07",
+          "startedAt": 56.40000000000053,
+          "completedAt": 81.89999999999962,
+          "seconds": 25.49999999999909,
+          "waitSeconds": 0.09999999999999964,
+          "distance": 16.585448496332056,
+          "depart": {
+            "x": -12.165786203763933,
+            "y": -0.6029024907452897
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D08",
+          "startedAt": 64.40000000000062,
+          "completedAt": 120.29999999999744,
+          "seconds": 55.89999999999682,
+          "waitSeconds": 5.799999999999979,
+          "distance": 38.45130980495962,
+          "depart": {
+            "x": -10.796404286068443,
+            "y": -0.9963627095805727
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D06",
+          "startedAt": 55.60000000000052,
+          "completedAt": 130.1999999999969,
+          "seconds": 74.59999999999637,
+          "waitSeconds": 6.799999999999976,
+          "distance": 45.362693100440744,
+          "depart": {
+            "x": -10.63490243286456,
+            "y": 0.8745009940185986
+          }
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "seed": 42,
+      "preset": "lounge-dispatch",
+      "design": {
+        "dock": "lounge",
+        "bay": "none",
+        "junction": "console"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 7,
+        "robotRoundTrips": 6,
+        "activeGuests": 0,
+        "activeRobots": 2,
+        "meanGuestTripTime": 43.04583333333367,
+        "meanRobotTripTime": 43.88333333333298,
+        "meanGuestWait": 2.1666666666666665,
+        "meanRobotWait": 78.7999999999979,
+        "totalWait": 367.1999999999916,
+        "totalDistance": 1121.5322637476886,
+        "energyUsed": 23.813789710784686,
+        "yieldEvents": 211,
+        "bayUses": 0,
+        "exploration": 96.38225255972696,
+        "retainedCoverage": 96.38225255972696,
+        "meanEuclideanDistance": 12.589551134959217,
+        "meanNetworkDistance": 14.750413729042075,
+        "contestedPassages": [
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 18,
+            "waitSeconds": 144.99999999999605,
+            "throughput": 4
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 98,
+            "waitSeconds": 108.89999999999809,
+            "throughput": 6
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 10,
+            "waitSeconds": 13.799999999999967,
+            "throughput": 22
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 13,
+            "waitSeconds": 9.099999999999984,
+            "throughput": 22
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 16,
+            "waitSeconds": 7.29999999999999,
+            "throughput": 20
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 15,
+            "waitSeconds": 4.100000000000001,
+            "throughput": 14
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 16,
+            "waitSeconds": 3.1000000000000014,
+            "throughput": 10
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 10,
+            "waitSeconds": 2.700000000000001,
+            "throughput": 142
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 2,
+            "waitSeconds": 1.2,
+            "throughput": 0
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 12,
+            "waitSeconds": 0.30000000000000004,
+            "throughput": 26
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 1,
+            "waitSeconds": 0,
+            "throughput": 4
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 2.1666666666666665,
+            "meanDistance": 36.860933015119755,
+            "yieldEvents": 98
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 78.7999999999979,
+            "meanDistance": 59.217467846203625,
+            "yieldEvents": 113,
+            "deliveriesCompleted": 7,
+            "roundTrips": 6,
+            "meanTripTime": 43.88333333333298
+          }
+        }
+      },
+      "memoryReuseEvents": 117,
+      "completedCycles": [
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 38.80000000000028,
+          "seconds": 38.80000000000028,
+          "waitSeconds": 6.999999999999991,
+          "distance": 20.948630234499156,
+          "depart": {
+            "x": -1.1267550944006228,
+            "y": -0.13977637813640287
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 51.40000000000046,
+          "seconds": 51.40000000000046,
+          "waitSeconds": 4.999999999999998,
+          "distance": 35.82165011776651,
+          "depart": {
+            "x": -2.5267894218960034,
+            "y": -0.9004905953928868
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 62.50000000000062,
+          "seconds": 62.50000000000062,
+          "waitSeconds": 20.100000000000016,
+          "distance": 30.725794729383836,
+          "depart": {
+            "x": -4.112131111156226,
+            "y": -0.3932453102482133
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D07",
+          "startedAt": 62.50000000000062,
+          "completedAt": 82.89999999999957,
+          "seconds": 20.399999999998947,
+          "waitSeconds": 3.100000000000044,
+          "distance": 10.55434974987373,
+          "depart": {
+            "x": -4.340967219071971,
+            "y": -0.48093646368195375
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D05",
+          "startedAt": 38.80000000000028,
+          "completedAt": 85.49999999999942,
+          "seconds": 46.699999999999136,
+          "waitSeconds": 3.599999999999987,
+          "distance": 32.65453889807031,
+          "depart": {
+            "x": -1.2282387662246244,
+            "y": -0.3630436919842921
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D06",
+          "startedAt": 51.40000000000046,
+          "completedAt": 94.89999999999888,
+          "seconds": 43.49999999999842,
+          "waitSeconds": 0.8999999999999968,
+          "distance": 32.04912431349308,
+          "depart": {
+            "x": -2.5213745291794933,
+            "y": -1.1316853818696044
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "R02",
+          "type": "robot",
+          "state": "Finding the fixed kitchen pickup",
+          "phase": "to-pickup",
+          "goal": {
+            "id": "kitchen-pickup",
+            "name": "Kitchen order pickup",
+            "roomId": "kitchen"
+          },
+          "location": {
+            "world": {
+              "x": -3.563968546837209,
+              "y": -1.4810000000000025,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "promenade",
+              "roomName": "Shared promenade",
+              "u": 6.23503145316279,
+              "v": 0.08399999999999741,
+              "nearestDoorId": "studio-a-door",
+              "routeRooms": []
+            }
+          },
+          "distances": {
+            "euclidean": 5.619894223326297,
+            "network": 6.828427124746191,
+            "travelled": 0.9436115726311509
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 168.8999999999947,
+            "deliveries": 0,
+            "yields": 90,
+            "energyUsed": 1.0984889258105146
+          },
+          "knowledge": {
+            "cells": 160,
+            "landmarks": 4,
+            "rooms": 3,
+            "doors": 1
+          },
+          "spawned": true,
+          "completed": false
+        },
+        {
+          "id": "R04",
+          "type": "robot",
+          "state": "Returning by remembered places",
+          "phase": "return",
+          "goal": {
+            "id": "parking-R04",
+            "name": "Lounge-edge base / R04 parking",
+            "roomId": "promenade"
+          },
+          "location": {
+            "world": {
+              "x": -2.0800626124560995,
+              "y": -1.6012688890437323,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "lounge",
+              "roomName": "Hotel lounge",
+              "u": 1.8869373875439006,
+              "v": 8.540731110956267,
+              "nearestDoorId": "studio-b-door",
+              "routeRooms": [
+                "lounge",
+                "promenade"
+              ]
+            }
+          },
+          "distances": {
+            "euclidean": 2.3640269351966614,
+            "network": 2.414213562373095,
+            "travelled": 114.4523162483543
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 129.7999999999969,
+            "deliveries": 3,
+            "yields": 7,
+            "energyUsed": 11.369585299867904
+          },
+          "knowledge": {
+            "cells": 761,
+            "landmarks": 14,
+            "rooms": 7,
+            "doors": 6
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "seed": 99,
+      "preset": "reference",
+      "design": {
+        "dock": "kitchen",
+        "bay": "none",
+        "junction": "console"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 7,
+        "robotRoundTrips": 7,
+        "activeGuests": 0,
+        "activeRobots": 1,
+        "meanGuestTripTime": 42.812500000000256,
+        "meanRobotTripTime": 53.35714285714165,
+        "meanGuestWait": 2.0916666666666677,
+        "meanRobotWait": 8.449999999999985,
+        "totalWait": 83.99999999999997,
+        "totalDistance": 1318.9896067861084,
+        "energyUsed": 43.558202970684775,
+        "yieldEvents": 125,
+        "bayUses": 0,
+        "exploration": 95.56918882072256,
+        "retainedCoverage": 95.56918882072256,
+        "meanEuclideanDistance": 13.571575486422228,
+        "meanNetworkDistance": 15.938104249492381,
+        "contestedPassages": [
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 20,
+            "waitSeconds": 20.800000000000026,
+            "throughput": 23
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 20,
+            "waitSeconds": 18.799999999999997,
+            "throughput": 21
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 12,
+            "waitSeconds": 10.399999999999979,
+            "throughput": 7
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 19,
+            "waitSeconds": 9.099999999999984,
+            "throughput": 23
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 9,
+            "waitSeconds": 4.6,
+            "throughput": 13
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 9,
+            "waitSeconds": 3.3000000000000016,
+            "throughput": 0
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 13,
+            "waitSeconds": 2.800000000000001,
+            "throughput": 10
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 2,
+            "waitSeconds": 2.0000000000000004,
+            "throughput": 17
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 12,
+            "waitSeconds": 1.6000000000000003,
+            "throughput": 17
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 9,
+            "waitSeconds": 0.8999999999999999,
+            "throughput": 19
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 2.0916666666666677,
+            "meanDistance": 34.876336235522395,
+            "yieldEvents": 89
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 8.449999999999985,
+            "meanDistance": 120.48938428339267,
+            "yieldEvents": 36,
+            "deliveriesCompleted": 7,
+            "roundTrips": 7,
+            "meanTripTime": 53.35714285714165
+          }
+        }
+      },
+      "memoryReuseEvents": 122,
+      "completedCycles": [
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 21.500000000000036,
+          "seconds": 21.500000000000036,
+          "waitSeconds": 1.4000000000000001,
+          "distance": 10.999787797604922,
+          "depart": {
+            "x": -10.092997079284894,
+            "y": 1.726433434326112
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 51.000000000000455,
+          "seconds": 51.000000000000455,
+          "waitSeconds": 4.899999999999999,
+          "distance": 26.01231079619218,
+          "depart": {
+            "x": -8.463317207637884,
+            "y": 0.6299202745348705
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 63.000000000000625,
+          "seconds": 63.000000000000625,
+          "waitSeconds": 4.799999999999999,
+          "distance": 43.6493063109142,
+          "depart": {
+            "x": -9.760928112280999,
+            "y": 2.294586361087734
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D05",
+          "startedAt": 21.500000000000036,
+          "completedAt": 94.79999999999889,
+          "seconds": 73.29999999999885,
+          "waitSeconds": 12.599999999999966,
+          "distance": 44.42018551206909,
+          "depart": {
+            "x": -10.225999999999999,
+            "y": 1.5189999999999984
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D06",
+          "startedAt": 51.000000000000455,
+          "completedAt": 102.99999999999842,
+          "seconds": 51.99999999999797,
+          "waitSeconds": 4.399999999999984,
+          "distance": 32.51853861455055,
+          "depart": {
+            "x": -8.215519679476241,
+            "y": 0.6398804965635133
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D07",
+          "startedAt": 63.000000000000625,
+          "completedAt": 117.99999999999757,
+          "seconds": 54.999999999996945,
+          "waitSeconds": 2.499999999999991,
+          "distance": 40.244288806182084,
+          "depart": {
+            "x": -9.725999999999999,
+            "y": 2.1033628012528625
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D08",
+          "startedAt": 94.79999999999889,
+          "completedAt": 152.49999999999562,
+          "seconds": 57.699999999996734,
+          "waitSeconds": 0,
+          "distance": 42.022448372194624,
+          "depart": {
+            "x": -10.22444137837474,
+            "y": 1.5174452730084018
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "R01",
+          "type": "robot",
+          "state": "Resuming the service route",
+          "phase": "outbound",
+          "goal": {
+            "id": "studio-b-delivery",
+            "name": "Studio B service",
+            "roomId": "studio-b"
+          },
+          "location": {
+            "world": {
+              "x": -4.71218878738212,
+              "y": 4.936993048662989,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "studio-a",
+              "roomName": "Studio A",
+              "u": 2.5998112126178805,
+              "v": 3.5429930486629893,
+              "nearestDoorId": "studio-a-door",
+              "routeRooms": []
+            }
+          },
+          "distances": {
+            "euclidean": 5.108988243511119,
+            "network": 12.121320343559644,
+            "travelled": 242.0906709238631
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 3.2000000000000015,
+            "deliveries": 0,
+            "yields": 4,
+            "energyUsed": 21.20385367390829
+          },
+          "knowledge": {
+            "cells": 334,
+            "landmarks": 8,
+            "rooms": 4,
+            "doors": 3
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "seed": 99,
+      "preset": "clear-circulation",
+      "design": {
+        "dock": "kitchen",
+        "bay": "lounge",
+        "junction": "open"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 23,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 7,
+        "robotRoundTrips": 7,
+        "activeGuests": 1,
+        "activeRobots": 1,
+        "meanGuestTripTime": 40.73913043478292,
+        "meanRobotTripTime": 53.88571428571305,
+        "meanGuestWait": 8.137499999999791,
+        "meanRobotWait": 8.349999999999985,
+        "totalWait": 228.69999999999496,
+        "totalDistance": 1274.0467604210462,
+        "energyUsed": 43.77094101209967,
+        "yieldEvents": 191,
+        "bayUses": 7,
+        "exploration": 95.59023066485753,
+        "retainedCoverage": 95.59023066485753,
+        "meanEuclideanDistance": 13.571575486422228,
+        "meanNetworkDistance": 15.919798423316541,
+        "contestedPassages": [
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 95,
+            "waitSeconds": 94.29999999999892,
+            "throughput": 21
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 17,
+            "waitSeconds": 16.89999999999997,
+            "throughput": 23
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 10,
+            "waitSeconds": 14.699999999999964,
+            "throughput": 5
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 14,
+            "waitSeconds": 7.19999999999999,
+            "throughput": 22
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 14,
+            "waitSeconds": 5.599999999999996,
+            "throughput": 16
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 10,
+            "waitSeconds": 5.299999999999997,
+            "throughput": 13
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 10,
+            "waitSeconds": 4.799999999999999,
+            "throughput": 19
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 5,
+            "waitSeconds": 2.500000000000001,
+            "throughput": 13
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 8,
+            "waitSeconds": 2.400000000000001,
+            "throughput": 0
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 8,
+            "waitSeconds": 0.7,
+            "throughput": 10
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 23,
+            "meanWait": 8.137499999999791,
+            "meanDistance": 32.904479073741214,
+            "yieldEvents": 158
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 8.349999999999985,
+            "meanDistance": 121.08481566281424,
+            "yieldEvents": 33,
+            "deliveriesCompleted": 7,
+            "roundTrips": 7,
+            "meanTripTime": 53.88571428571305
+          }
+        }
+      },
+      "memoryReuseEvents": 117,
+      "completedCycles": [
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 21.500000000000036,
+          "seconds": 21.500000000000036,
+          "waitSeconds": 1.4000000000000001,
+          "distance": 10.999787797604922,
+          "depart": {
+            "x": -10.092997079284894,
+            "y": 1.726433434326112
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 60.50000000000059,
+          "seconds": 60.50000000000059,
+          "waitSeconds": 12.69999999999997,
+          "distance": 27.34753320042649,
+          "depart": {
+            "x": -8.463317207637884,
+            "y": 0.6299202745348705
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 65.80000000000054,
+          "seconds": 65.80000000000054,
+          "waitSeconds": 7.499999999999989,
+          "distance": 43.19915413343909,
+          "depart": {
+            "x": -9.760928112280999,
+            "y": 2.294586361087734
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D05",
+          "startedAt": 21.500000000000036,
+          "completedAt": 88.09999999999927,
+          "seconds": 66.59999999999923,
+          "waitSeconds": 7.699999999999983,
+          "distance": 43.047313356910955,
+          "depart": {
+            "x": -10.225999999999999,
+            "y": 1.5189999999999984
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D07",
+          "startedAt": 65.80000000000054,
+          "completedAt": 114.29999999999778,
+          "seconds": 48.49999999999724,
+          "waitSeconds": 0,
+          "distance": 37.348331231229686,
+          "depart": {
+            "x": -9.725999999999999,
+            "y": 2.1033628012528625
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D06",
+          "startedAt": 60.50000000000059,
+          "completedAt": 117.09999999999762,
+          "seconds": 56.59999999999703,
+          "waitSeconds": 0.8999999999999968,
+          "distance": 38.481355318279434,
+          "depart": {
+            "x": -8.306401804568162,
+            "y": 0.5019239393153386
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D08",
+          "startedAt": 88.09999999999927,
+          "completedAt": 145.799999999996,
+          "seconds": 57.699999999996734,
+          "waitSeconds": 0,
+          "distance": 41.825116689503226,
+          "depart": {
+            "x": -10.22444137837474,
+            "y": 1.5174452730084018
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "G04",
+          "type": "guest",
+          "state": "Finding Studio A service",
+          "phase": "outbound",
+          "goal": {
+            "id": "studio-a-delivery",
+            "name": "Studio A service",
+            "roomId": "studio-a"
+          },
+          "location": {
+            "world": {
+              "x": 7.844765075709754,
+              "y": 5.019,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "arrival-passage",
+              "roomName": "Arrival passage",
+              "u": 0.318765075709754,
+              "v": 4.869,
+              "nearestDoorId": "passage-grab",
+              "routeRooms": []
+            }
+          },
+          "distances": {
+            "euclidean": 13.400653572940803,
+            "network": 17.035533905932738,
+            "travelled": 12.540494826115822
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 162.89999999999503,
+            "deliveries": 0,
+            "yields": 89,
+            "energyUsed": 0
+          },
+          "knowledge": {
+            "cells": 551,
+            "landmarks": 8,
+            "rooms": 4,
+            "doors": 3
+          },
+          "spawned": true,
+          "completed": false
+        },
+        {
+          "id": "R01",
+          "type": "robot",
+          "state": "Resuming the service route",
+          "phase": "outbound",
+          "goal": {
+            "id": "studio-b-delivery",
+            "name": "Studio B service",
+            "roomId": "studio-b"
+          },
+          "location": {
+            "world": {
+              "x": -4.71218878738212,
+              "y": 4.936993048662989,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "studio-a",
+              "roomName": "Studio A",
+              "u": 2.5998112126178805,
+              "v": 3.5429930486629893,
+              "nearestDoorId": "studio-a-door",
+              "routeRooms": []
+            }
+          },
+          "distances": {
+            "euclidean": 5.108988243511119,
+            "network": 12.121320343559644,
+            "travelled": 242.0906709238631
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 3.2000000000000015,
+            "deliveries": 0,
+            "yields": 4,
+            "energyUsed": 21.20385367390829
+          },
+          "knowledge": {
+            "cells": 334,
+            "landmarks": 8,
+            "rooms": 4,
+            "doors": 3
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "seed": 99,
+      "preset": "service-buffer",
+      "design": {
+        "dock": "service",
+        "bay": "service",
+        "junction": "partition"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 24,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 6,
+        "activeGuests": 0,
+        "activeRobots": 2,
+        "meanGuestTripTime": 43.41250000000026,
+        "meanRobotTripTime": 52.33333333333298,
+        "meanGuestWait": 2.3458333333333368,
+        "meanRobotWait": 66.32499999999854,
+        "totalWait": 321.59999999999417,
+        "totalDistance": 1195.5447532813316,
+        "energyUsed": 34.04515831094425,
+        "yieldEvents": 124,
+        "bayUses": 0,
+        "exploration": 96.11716621253406,
+        "retainedCoverage": 96.11716621253406,
+        "meanEuclideanDistance": 14.0081908471078,
+        "meanNetworkDistance": 16.432092119635346,
+        "contestedPassages": [
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 6,
+            "waitSeconds": 233.19999999999104,
+            "throughput": 14
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 23,
+            "waitSeconds": 21.600000000000037,
+            "throughput": 25
+          },
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 21,
+            "waitSeconds": 17.299999999999976,
+            "throughput": 23
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 6,
+            "waitSeconds": 10.399999999999979,
+            "throughput": 13
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 16,
+            "waitSeconds": 7.799999999999988,
+            "throughput": 6
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 15,
+            "waitSeconds": 7.499999999999989,
+            "throughput": 23
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 11,
+            "waitSeconds": 6.699999999999992,
+            "throughput": 2
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 11,
+            "waitSeconds": 3.800000000000002,
+            "throughput": 17
+          },
+          {
+            "id": "service-promenade",
+            "name": "Service corridor threshold",
+            "events": 4,
+            "waitSeconds": 1.8000000000000005,
+            "throughput": 6
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 9,
+            "waitSeconds": 0.8999999999999999,
+            "throughput": 19
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 2,
+            "waitSeconds": 0,
+            "throughput": 17
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 24,
+            "meanWait": 2.3458333333333368,
+            "meanDistance": 35.147823933105656,
+            "yieldEvents": 83
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 66.32499999999854,
+            "meanDistance": 87.99924472169894,
+            "yieldEvents": 41,
+            "deliveriesCompleted": 8,
+            "roundTrips": 6,
+            "meanTripTime": 52.33333333333298
+          }
+        }
+      },
+      "memoryReuseEvents": 124,
+      "completedCycles": [
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 19.500000000000007,
+          "seconds": 19.500000000000007,
+          "waitSeconds": 0.2,
+          "distance": 9.714505650168093,
+          "depart": {
+            "x": -9.32294802951153,
+            "y": -0.485872833995793
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 45.300000000000374,
+          "seconds": 45.300000000000374,
+          "waitSeconds": 3.5000000000000018,
+          "distance": 26.058111305156036,
+          "depart": {
+            "x": -10.650317207637883,
+            "y": -1.1280797254651294
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 55.70000000000052,
+          "seconds": 55.70000000000052,
+          "waitSeconds": 4.799999999999999,
+          "distance": 35.641687593457185,
+          "depart": {
+            "x": -9.570893915146982,
+            "y": -1.0944135355534308
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 70.20000000000029,
+          "seconds": 70.20000000000029,
+          "waitSeconds": 3.600000000000002,
+          "distance": 45.62198307812796,
+          "depart": {
+            "x": -11.330895790426691,
+            "y": -1.0376345052818965
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D05",
+          "startedAt": 19.500000000000007,
+          "completedAt": 91.59999999999907,
+          "seconds": 72.09999999999906,
+          "waitSeconds": 10.399999999999979,
+          "distance": 42.59764079043677,
+          "depart": {
+            "x": -9.094697735228248,
+            "y": -0.48100000000000165
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D07",
+          "startedAt": 55.70000000000052,
+          "completedAt": 106.8999999999982,
+          "seconds": 51.19999999999768,
+          "waitSeconds": 1.2999999999999954,
+          "distance": 36.01272385112866,
+          "depart": {
+            "x": -9.422959389010693,
+            "y": -0.978680526592386
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "R02",
+          "type": "robot",
+          "state": "Returning by remembered places",
+          "phase": "return",
+          "goal": {
+            "id": "parking-R02",
+            "name": "Service base / R02 parking",
+            "roomId": "service-corridor"
+          },
+          "location": {
+            "world": {
+              "x": -9.3425475581537,
+              "y": -0.01161858116339106,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "promenade",
+              "roomName": "Shared promenade",
+              "u": 0.45645244184629874,
+              "v": 1.5533814188366089,
+              "nearestDoorId": "kitchen-promenade",
+              "routeRooms": [
+                "promenade",
+                "service-corridor"
+              ]
+            }
+          },
+          "distances": {
+            "euclidean": 1.7195193929838444,
+            "network": 2.2071067811865475,
+            "travelled": 70.52701125451668
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 188.39999999999358,
+            "deliveries": 2,
+            "yields": 13,
+            "energyUsed": 7.715160900361853
+          },
+          "knowledge": {
+            "cells": 830,
+            "landmarks": 14,
+            "rooms": 7,
+            "doors": 6
+          },
+          "spawned": true,
+          "completed": false
+        },
+        {
+          "id": "R03",
+          "type": "robot",
+          "state": "Returning by remembered places",
+          "phase": "return",
+          "goal": {
+            "id": "parking-R03",
+            "name": "Service base / R03 parking",
+            "roomId": "service-corridor"
+          },
+          "location": {
+            "world": {
+              "x": -8.851828449862685,
+              "y": 0.26642453080460154,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "promenade",
+              "roomName": "Shared promenade",
+              "u": 0.9471715501373144,
+              "v": 1.8314245308046015,
+              "nearestDoorId": "kitchen-promenade",
+              "routeRooms": [
+                "promenade",
+                "service-corridor"
+              ]
+            }
+          },
+          "distances": {
+            "euclidean": 2.801132779546507,
+            "network": 2.914213562373095,
+            "travelled": 157.50340974708837
+          },
+          "performance": {
+            "elapsed": 299.9999999999997,
+            "waitSeconds": 60.200000000000585,
+            "deliveries": 2,
+            "yields": 9,
+            "energyUsed": 14.673272779767206
+          },
+          "knowledge": {
+            "cells": 923,
+            "landmarks": 16,
+            "rooms": 8,
+            "doors": 7
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "seed": 99,
+      "preset": "lounge-dispatch",
+      "design": {
+        "dock": "lounge",
+        "bay": "none",
+        "junction": "console"
+      },
+      "metrics": {
+        "time": 299.9999999999997,
+        "totalGuests": 24,
+        "guestsSpawned": 24,
+        "guestsCompleted": 23,
+        "totalDeliveries": 8,
+        "deliveriesCompleted": 8,
+        "robotRoundTrips": 8,
+        "activeGuests": 1,
+        "activeRobots": 0,
+        "meanGuestTripTime": 43.10000000000024,
+        "meanRobotTripTime": 48.67499999999937,
+        "meanGuestWait": 8.379166666666507,
+        "meanRobotWait": 15.32499999999999,
+        "totalWait": 262.3999999999961,
+        "totalDistance": 1051.3950678836175,
+        "energyUsed": 21.76244600702984,
+        "yieldEvents": 203,
+        "bayUses": 0,
+        "exploration": 95.4948805460751,
+        "retainedCoverage": 95.4948805460751,
+        "meanEuclideanDistance": 12.346457969348009,
+        "meanNetworkDistance": 14.55866251125079,
+        "contestedPassages": [
+          {
+            "id": "passage-grab",
+            "name": "Grab & Go doorway",
+            "events": 101,
+            "waitSeconds": 96.99999999999876,
+            "throughput": 21
+          },
+          {
+            "id": "studio-a-door",
+            "name": "Studio A doorway",
+            "events": 13,
+            "waitSeconds": 28.80000000000014,
+            "throughput": 4
+          },
+          {
+            "id": "promenade-lounge",
+            "name": "Lounge threshold",
+            "events": 19,
+            "waitSeconds": 24.60000000000008,
+            "throughput": 21
+          },
+          {
+            "id": "studio-b-door",
+            "name": "Studio B doorway",
+            "events": 19,
+            "waitSeconds": 22.800000000000054,
+            "throughput": 4
+          },
+          {
+            "id": "reception-passage",
+            "name": "Reception side doorway",
+            "events": 17,
+            "waitSeconds": 8.099999999999987,
+            "throughput": 22
+          },
+          {
+            "id": "kitchen-promenade",
+            "name": "Kitchen dispatch threshold",
+            "events": 4,
+            "waitSeconds": 3.3000000000000016,
+            "throughput": 2
+          },
+          {
+            "id": "grab-promenade",
+            "name": "Grab & Go junction",
+            "events": 4,
+            "waitSeconds": 2.0000000000000004,
+            "throughput": 19
+          },
+          {
+            "id": "reception-lifts",
+            "name": "Lift vestibule threshold",
+            "events": 11,
+            "waitSeconds": 1.6000000000000003,
+            "throughput": 16
+          },
+          {
+            "id": "lifts-bar",
+            "name": "Lift / bar threshold",
+            "events": 10,
+            "waitSeconds": 0.8999999999999999,
+            "throughput": 19
+          },
+          {
+            "id": "lounge-bar",
+            "name": "Lounge / bar passage",
+            "events": 5,
+            "waitSeconds": 0,
+            "throughput": 13
+          },
+          {
+            "id": "bar-terrace",
+            "name": "Terrace doorway",
+            "events": 0,
+            "waitSeconds": 0,
+            "throughput": 2
+          }
+        ],
+        "history": [],
+        "byType": {
+          "guest": {
+            "count": 24,
+            "completed": 23,
+            "meanWait": 8.379166666666507,
+            "meanDistance": 34.25914553315598,
+            "yieldEvents": 168
+          },
+          "robot": {
+            "count": 4,
+            "completed": 0,
+            "meanWait": 15.32499999999999,
+            "meanDistance": 57.29389377196849,
+            "yieldEvents": 35,
+            "deliveriesCompleted": 8,
+            "roundTrips": 8,
+            "meanTripTime": 48.67499999999937
+          }
+        }
+      },
+      "memoryReuseEvents": 120,
+      "completedCycles": [
+        {
+          "robotId": "R02",
+          "taskId": "D02",
+          "startedAt": 0,
+          "completedAt": 34.800000000000225,
+          "seconds": 34.800000000000225,
+          "waitSeconds": 1.8000000000000005,
+          "distance": 20.574185641012573,
+          "depart": {
+            "x": -2.2023172076378836,
+            "y": -1.0000797254651295
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D04",
+          "startedAt": 0,
+          "completedAt": 35.600000000000236,
+          "seconds": 35.600000000000236,
+          "waitSeconds": 12.499999999999972,
+          "distance": 12.862185526018827,
+          "depart": {
+            "x": -3.8319970792848936,
+            "y": 0.09643343432611218
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D01",
+          "startedAt": 0,
+          "completedAt": 39.30000000000029,
+          "seconds": 39.30000000000029,
+          "waitSeconds": 4.4,
+          "distance": 23.461079862412483,
+          "depart": {
+            "x": -1.153765651119638,
+            "y": 0.20201387806630322
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D03",
+          "startedAt": 0,
+          "completedAt": 68.80000000000037,
+          "seconds": 68.80000000000037,
+          "waitSeconds": 19.60000000000001,
+          "distance": 36.33914259783776,
+          "depart": {
+            "x": -3.4999281122809984,
+            "y": 0.6645863610877343
+          }
+        },
+        {
+          "robotId": "R04",
+          "taskId": "D06",
+          "startedAt": 35.600000000000236,
+          "completedAt": 77.49999999999987,
+          "seconds": 41.899999999999636,
+          "waitSeconds": 2.79999999999999,
+          "distance": 27.433177210147647,
+          "depart": {
+            "x": -3.948115727163477,
+            "y": 0.24111572716347596
+          }
+        },
+        {
+          "robotId": "R01",
+          "taskId": "D07",
+          "startedAt": 39.30000000000029,
+          "completedAt": 91.69999999999906,
+          "seconds": 52.399999999998776,
+          "waitSeconds": 7.599999999999973,
+          "distance": 33.29907593296894,
+          "depart": {
+            "x": -0.9572424820020715,
+            "y": 0.2959871974580208
+          }
+        },
+        {
+          "robotId": "R02",
+          "taskId": "D05",
+          "startedAt": 34.800000000000225,
+          "completedAt": 98.49999999999868,
+          "seconds": 63.699999999998454,
+          "waitSeconds": 9.499999999999975,
+          "distance": 37.75222931547874,
+          "depart": {
+            "x": -2.0223703922901057,
+            "y": -0.9802921143325836
+          }
+        },
+        {
+          "robotId": "R03",
+          "taskId": "D08",
+          "startedAt": 68.80000000000037,
+          "completedAt": 121.69999999999736,
+          "seconds": 52.89999999999699,
+          "waitSeconds": 3.100000000000044,
+          "distance": 37.454499001996986,
+          "depart": {
+            "x": -3.3605649643538387,
+            "y": 0.6648601264046476
+          }
+        }
+      ],
+      "remaining": [
+        {
+          "id": "G10",
+          "type": "guest",
+          "state": "Finding Grab & Go visit",
+          "phase": "outbound",
+          "goal": {
+            "id": "grab-go-visit",
+            "name": "Grab & Go visit",
+            "roomId": "grab-go"
+          },
+          "location": {
+            "world": {
+              "x": 7.673827221721126,
+              "y": 3.455035818175807,
+              "z": -1.3716000000000002,
+              "floorId": "ground-public"
+            },
+            "semantic": {
+              "roomId": "arrival-passage",
+              "roomName": "Arrival passage",
+              "u": 0.14782722172112628,
+              "v": 3.3050358181758073,
+              "nearestDoorId": "passage-grab",
+              "routeRooms": [
+                "arrival-passage",
+                "grab-go"
+              ]
+            }
+          },
+          "distances": {
+            "euclidean": 3.273755231477335,
+            "network": 3.2071067811865475,
+            "travelled": 16.7051920743745
+          },
+          "performance": {
+            "elapsed": 273.4999999999937,
+            "waitSeconds": 144.79999999999606,
+            "deliveries": 0,
+            "yields": 81,
+            "energyUsed": 0
+          },
+          "knowledge": {
+            "cells": 636,
+            "landmarks": 9,
+            "rooms": 5,
+            "doors": 4
+          },
+          "spawned": true,
+          "completed": false
+        }
+      ]
+    }
+  ],
+  "memoryAblation": {
+    "seed": 42,
+    "design": {
+      "dock": "kitchen",
+      "bay": "none",
+      "junction": "console"
+    },
+    "memory": false,
+    "metrics": {
+      "time": 299.9999999999997,
+      "totalGuests": 24,
+      "guestsSpawned": 24,
+      "guestsCompleted": 12,
+      "totalDeliveries": 8,
+      "deliveriesCompleted": 6,
+      "robotRoundTrips": 5,
+      "activeGuests": 12,
+      "activeRobots": 3,
+      "meanGuestTripTime": 37.466666666666924,
+      "meanRobotTripTime": 34.61999999999964,
+      "meanGuestWait": 25.32916666666631,
+      "meanRobotWait": 32.82499999999943,
+      "totalWait": 739.1999999999892,
+      "totalDistance": 3841.582947678973,
+      "energyUsed": 57.55320371153614,
+      "yieldEvents": 299,
+      "bayUses": 0,
+      "exploration": 97.13701431492842,
+      "retainedCoverage": 51.60190865712339,
+      "meanEuclideanDistance": 13.593708260510095,
+      "meanNetworkDistance": 15.914896728019903,
+      "contestedPassages": [
+        {
+          "id": "lounge-bar",
+          "name": "Lounge / bar passage",
+          "events": 74,
+          "waitSeconds": 77.29999999999988,
+          "throughput": 5
+        },
+        {
+          "id": "studio-a-door",
+          "name": "Studio A doorway",
+          "events": 78,
+          "waitSeconds": 68.40000000000039,
+          "throughput": 5
+        },
+        {
+          "id": "studio-b-door",
+          "name": "Studio B doorway",
+          "events": 13,
+          "waitSeconds": 64.10000000000063,
+          "throughput": 2
+        },
+        {
+          "id": "lifts-bar",
+          "name": "Lift / bar threshold",
+          "events": 15,
+          "waitSeconds": 12.399999999999972,
+          "throughput": 33
+        },
+        {
+          "id": "reception-lifts",
+          "name": "Lift vestibule threshold",
+          "events": 10,
+          "waitSeconds": 3.2000000000000015,
+          "throughput": 7
+        },
+        {
+          "id": "promenade-lounge",
+          "name": "Lounge threshold",
+          "events": 5,
+          "waitSeconds": 2.500000000000001,
+          "throughput": 14
+        },
+        {
+          "id": "kitchen-promenade",
+          "name": "Kitchen dispatch threshold",
+          "events": 7,
+          "waitSeconds": 0.7999999999999999,
+          "throughput": 15
+        },
+        {
+          "id": "reception-passage",
+          "name": "Reception side doorway",
+          "events": 10,
+          "waitSeconds": 0.30000000000000004,
+          "throughput": 15
+        },
+        {
+          "id": "passage-grab",
+          "name": "Grab & Go doorway",
+          "events": 9,
+          "waitSeconds": 0,
+          "throughput": 17
+        },
+        {
+          "id": "grab-promenade",
+          "name": "Grab & Go junction",
+          "events": 7,
+          "waitSeconds": 0,
+          "throughput": 14
+        },
+        {
+          "id": "service-promenade",
+          "name": "Service corridor threshold",
+          "events": 1,
+          "waitSeconds": 0,
+          "throughput": 2
+        },
+        {
+          "id": "bar-terrace",
+          "name": "Terrace doorway",
+          "events": 0,
+          "waitSeconds": 0,
+          "throughput": 2
+        }
+      ],
+      "history": [],
+      "byType": {
+        "guest": {
+          "count": 24,
+          "completed": 12,
+          "meanWait": 25.32916666666631,
+          "meanDistance": 133.45689172019993,
+          "yieldEvents": 208
+        },
+        "robot": {
+          "count": 4,
+          "completed": 0,
+          "meanWait": 32.82499999999943,
+          "meanDistance": 159.65438659854377,
+          "yieldEvents": 91,
+          "deliveriesCompleted": 6,
+          "roundTrips": 5,
+          "meanTripTime": 34.61999999999964
+        }
+      }
+    },
+    "memoryReuseEvents": 0
+  }
+}

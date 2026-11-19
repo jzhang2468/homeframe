@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b10">
+<meta name="description" content="HOMEFRAME studies how guests and delivery robots share a New York hotel floor. Generate alternative layouts, compare their circulation, and develop a design.">
+<title>HOMEFRAME — Shared Circulation</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="masthead"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>HOMEFRAME <small>CIRCULATION LAB</small></a><nav><button id="source-open" class="metal-button">Site & model</button><button id="submission-open" class="metal-button">Final project</button></nav></header>
+<main class="shell">
+<section class="hero"><div><p class="overline">MOXY EAST VILLAGE · NEW YORK</p><h1>SHARED CIRCULATION<span>.</span></h1></div><p class="hero-deck">Where should a delivery robot wait?<br>Test the space guests and robots share, then evolve the floor plan.</p></section>
+<div class="workspace">
+<section class="viewer" aria-label="Interactive hotel circulation simulation">
+<div id="viewport" class="viewport">
+<div id="scene-host" aria-label="3D hotel cutaway. Drag to orbit, scroll to zoom, click an agent to inspect."></div>
+<div class="scene-identity"><strong id="scene-title">BASELINE</strong><span>PUBLIC FLOOR · HISTORIC PLAN STUDY</span></div>
+<div id="run-status" class="run-status">READY</div>
+<div id="pair-labels" class="pair-labels" hidden><span id="label-a">A</span><span id="label-b">B</span></div>
+<div id="loading" class="loading">Preparing the circulation model…</div>
+<div class="view-tools"><button id="camera-focus" class="metal-button" aria-label="Focus shared junction">◎</button><button id="camera-top" class="metal-button" aria-label="Top view">⌗</button><button id="camera-iso" class="metal-button" aria-label="Isometric view">◈</button><button id="camera-plus" class="metal-button" aria-label="Zoom in">+</button><button id="camera-minus" class="metal-button" aria-label="Zoom out">−</button></div>
+<div class="scene-bottom"><div class="legend"><span><i class="human"></i>Guest</span><span><i class="robot"></i>Robot</span><span><i class="bay"></i>Passing bay</span></div><span>DRAG TO ORBIT · SCROLL TO ZOOM</span></div>
+</div>
+<div class="transport"><div class="transport-group"><button id="play" class="run-button">Run</button><button id="reset" class="metal-button" aria-label="Reset simulation">↺</button><button id="step" class="metal-button">+10s</button><button id="speed" class="metal-button" aria-label="Change simulation speed">1×</button><output id="clock">00:00</output></div><div class="layers" aria-label="Map layer"><button class="layer active" data-layer="sensors" aria-pressed="true">Sensors</button><button class="layer" data-layer="paths" aria-pressed="false">Trails</button><button class="layer" data-layer="traffic" aria-pressed="false">Traffic</button></div></div>
+<p id="layer-note" class="layer-note">Inspect an agent to see its field of view, private spatial map, and remembered landmarks.</p>
+</section>
+<aside class="console" aria-label="Circulation design controls">
+<div class="console-head"><h2>DESIGN CONTROL</h2><span id="seed-label">SEED 42</span></div>
+<div class="console-tabs" role="tablist"><button data-tab="design" id="tab-design" role="tab" aria-selected="true" aria-controls="panel-design">Design</button><button data-tab="agent" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent" tabindex="-1">Agent</button><button data-tab="results" id="tab-results" role="tab" aria-selected="false" aria-controls="panel-results" tabindex="-1">Results</button></div>
+<section id="panel-design" class="console-panel" role="tabpanel" aria-labelledby="tab-design">
+<p class="field-label">ENVIRONMENT OPTIONS</p><div id="design-fields"></div>
+<p class="muted design-note">The source plan fixes the main rooms. These options propose changes to the shared circulation space.</p>
+<button id="preview" class="run-button wide">Run this layout</button><div class="save-configurations"><button id="save-a" class="metal-button">Set as A</button><button id="save-b" class="metal-button">Set as B</button></div>
+<div class="design-divider"></div><p class="field-label">DESIGN ITERATION</p><p id="parent-name" class="parent-name">Parent · Baseline</p><button id="generate" class="metal-button wide">Generate two variations</button><p class="muted">Run A and B, select a parent, then generate its next pair.</p>
+<details class="demand"><summary>Simulation demand</summary><div class="field compact"><label for="guest-count">Guests</label><input id="guest-count" type="number" min="4" max="60" step="1" value="24" required></div><div class="field compact"><label for="robot-count">Robots</label><input id="robot-count" type="number" min="1" max="8" step="1" value="4" required></div><div class="field compact"><label for="seed">Seed</label><input id="seed" type="number" min="1" max="99999" step="1" value="42" required></div><label class="memory-toggle"><input type="checkbox" id="memory" checked>Retain observed maps and landmarks</label><button id="demand-apply" class="metal-button wide">Apply to both candidates</button></details>
+</section>
+<section id="panel-agent" class="console-panel" role="tabpanel" aria-labelledby="tab-agent" hidden>
+<label for="agent-select" class="field-label">INSPECT AGENT</label><select id="agent-select"></select>
+<div id="agent-role" class="agent-role"><strong id="role-name">Guest</strong><p id="role-goal"></p></div><div class="decision"><span class="field-label">CURRENT ACTION</span><strong id="agent-action"></strong><p id="agent-goal" class="muted"></p></div>
+<dl class="location-readout"><dt>World position · metres</dt><dd id="world-location"></dd><dt>Room reference · local coordinates</dt><dd id="room-location"></dd></dl>
+<div class="distances"><div><span>Straight line</span><strong id="distance-euclidean">—</strong></div><div><span>Walkable route</span><strong id="distance-network">—</strong></div></div><p class="mini-note">Route distance uses the complete floor for observer comparison. Each agent plans with its private map.</p>
+<div class="map-head"><span class="field-label">PRIVATE SPATIAL MAP</span><span id="memory-count">0 landmarks</span></div><canvas id="knowledge" width="620" height="300" aria-label="Agent map with known floor, visible cells, obstacles, people, and landmarks."></canvas><p class="map-legend">Cyan visible · slate remembered · violet landmarks · amber other agents</p><ul id="agent-landmarks" class="landmark-list"></ul>
+</section>
+<section id="panel-results" class="console-panel" role="tabpanel" aria-labelledby="tab-results" hidden>
+<p class="field-label">SAME DEMAND · DIFFERENT SPACE</p><div id="candidate-slots" class="candidate-slots"></div><button id="compare-run" class="run-button wide">Run A / B</button><button id="compare-finish" class="metal-button wide">Evaluate 300 seconds</button><p id="comparison-progress" role="status" class="comparison-progress"></p><div id="result-table"></div><div id="passage-diagnostics" class="passage-diagnostics"></div><p class="muted result-caveat">Completion counts accompany time averages. Times include completed journeys only.</p><div class="save-configurations"><button id="choose-a" class="metal-button">Choose A as parent</button><button id="choose-b" class="metal-button">Choose B as parent</button></div><button id="export" class="metal-button wide export">Export experiment JSON</button>
+</section>
+</aside>
+</div>
+<section class="totals" aria-label="Current simulation totals"><div><span>GUEST JOURNEYS</span><strong id="total-guests">0 / 24</strong></div><div><span>DELIVERIES</span><strong id="total-robots">0 / 12</strong></div><div><span>GUEST DELAY</span><strong id="total-delay">0s</strong></div><div><span>LANDMARK REUSE</span><strong id="total-memory">0</strong></div></section>
+<section class="experiments" aria-labelledby="history-title"><div class="section-line"><h2 id="history-title">Generated environments</h2><span id="generation-label">Generation 0</span></div><div id="design-history" class="design-history"></div></section>
+<footer><span>HOMEFRAME · SPATIAL AI FINAL</span><span>2018 public plan. Hypothetical robot service. Simulated behavior.</span></footer>
+</main>
+<dialog id="source-dialog"><form method="dialog"><button class="metal-button close" aria-label="Close site information">×</button></form><p class="overline">SITE & SEMANTIC MODEL</p><h2>Moxy East Village</h2><p>This study uses the ground-floor relationships in a 2018 public filing for 112 East 11th Street, New York. The plan locates the guest entrance, reception, lifts, bar, lounge, studios, kitchen prep and service corridor.</p><div id="source-data"></div><figure class="source-plan"><img src="media/source-plan.png" alt="Ground-floor plan for Moxy East Village in the 2018 New York Community Board 3 filing."><figcaption>Source drawing, 2018 CB3 filing, page 24. Approximate digitization preserves the public-room connections.</figcaption></figure><h3>What the simulation measures</h3><p>Each agent has a metric world position and a room reference. Straight-line distance and shortest walkable distance describe different spatial relationships. Guests try to reach their destination. Robots pick up in the fixed kitchen, deliver to a public-room handoff, then return to a movable base.</p><p>The robot envelope references PUDU’s FlashBot Max, 538 × 534 × 1,052 mm, with a published cruise range of 0.5–1.2 m/s. Our circular body and movement rules simplify this hardware.</p><p><a href="https://www.pudurobotics.com/en/products/flashbot-new" target="_blank" rel="noopener">Manufacturer robot specifications</a></p><h3>Design assumptions</h3><p>The digitized plan is approximate. Furniture, sensor ranges, robot demand, movement rules and the tested interventions are research assumptions. The model evaluates common-floor circulation and excludes elevator travel.</p><p><a href="semantic-model.md" target="_blank" rel="noopener">Read the semantic model</a></p><p><a href="https://www.nyc.gov/html/mancb3/downloads/sla/2018/12/questionnaires/18-%20112%20East%2011th%20Street_Questionnaire.pdf" target="_blank" rel="noopener">NYC Community Board 3 source filing</a></p></dialog>
+<dialog id="submission-dialog"><form method="dialog"><button class="metal-button close" aria-label="Close final project">×</button></form><p class="overline">FINAL PROJECT MATERIALS</p><h2>Shared circulation</h2><p>Use this lab to create a floor arrangement, compare human and robot performance, and develop another generation from your chosen candidate.</p><div class="deliverable-links"><a href="semantic-model.md">Semantic model</a><a href="media/instructions.mp4">Instruction video</a><a href="media/evolution-demo.mp4">Design evolution demo</a><a href="submission-deck.pdf">Project deck</a><a href="requirements.md">Requirement mapping</a></div><h3>Model choices</h3><p>A physical, dynamic, multi-agent environment with deterministic seeded demand. The designer selects successive layout options. Historic real-world plan data supplies the secondary function.</p></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
